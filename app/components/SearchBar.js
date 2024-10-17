@@ -7,10 +7,15 @@ export default function SearchBar() {
     return (
         <View style={style.Assembler}>
         <View style={style.Main}>
-            <TextInput placeholder='Search...' style={style.Input}></TextInput>
+            <TextInput 
+                placeholder='Search...'
+                style={style.Input}>
+            </TextInput>
         </View>
         <View style={style.buttonP}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => alert('Text entered.')}
+                >
                     <AntDesign style={style.icon} name='search1' size={25}/>
                 </TouchableOpacity>
             </View>
