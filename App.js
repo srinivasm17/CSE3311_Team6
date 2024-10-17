@@ -1,22 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity } from "react-native";
+import MainContainer from './app/MainContainer';
 
 export default function App() {
   console.log("App executed");
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>Hello world123</Text>
-      <StatusBar style="auto" />
-    </SafeAreaView>
-  );
+  return <MainContainer />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
