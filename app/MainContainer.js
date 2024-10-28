@@ -16,13 +16,12 @@ const historyName = 'History';
 const settingsName = 'Settings';
 const resultsName = 'Results';
 
-const Stack = createNativeStackNavigator;
+const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function MainContainer() {
+function Tabs() {
     return (
-        <NavigationContainer>
-            <Tab.Navigator
+        <Tab.Navigator
             initialRouteName={homeName}
             screenOptions={({route}) => ({
                 tabBarIcon: ({focused, color, size}) => {
@@ -40,18 +39,33 @@ function MainContainer() {
                     return <Ionicons name={iconName} size={size} color={'black'}/>
                 },
                 tabBarActiveTintColor: 'black',
-                tabBarInactiveTintColor: 'grey'
+                tabBarInactiveTintColor: 'grey',
+                headerShown: false,
+                tabBarHideOnKeyboard: true
             })}>
 
             <Tab.Screen name={homeName} component={HomeScreen}/>
             <Tab.Screen name={historyName} component={HistoryScreen}/>
             <Tab.Screen name={settingsName} component={SettingsScreen}/>
 
-                
-            </Tab.Navigator>
-        </NavigationContainer>
-       
+        </Tab.Navigator>
     );
 }
 
-export default MainContainer;
+export default function MainContainer() {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+            initialRouteName={homeName}
+            screenOptions={{
+                headerShown: false
+              }}
+            >
+                <Stack.Screen name={homeName} component={Tabs}/>
+                <Stack.Screen name={historyName} component={Tabs}/>
+                <Stack.Screen name={settingsName} component={Tabs}/>
+                <Stack.Screen name={resultsName} component={ResultsScreen}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+}

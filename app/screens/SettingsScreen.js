@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 
 function SettingsScreen({navigation}) {
     return (
-        <View style={style.history}>
+        <View style={style.settings}>
             <Text
                 onPress={() => navigation.navigate('Home')}
                 style={style.TextStyle}>Settings Screen
@@ -15,7 +15,7 @@ function SettingsScreen({navigation}) {
 }
 
 const style = StyleSheet.create({
-    history:{
+    settings:{
         flex: 1,
         alignItems:'center',
         justifyContent:'center'
