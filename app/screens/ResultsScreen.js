@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { useState, useEffect } from "react";
-import { FlatList, Text, View, TextInput, Alert, Image, ImageBackground, TouchableOpacity} from 'react-native';
+import { FlatList, Text, View, TextInput, Alert, Image, ImageBackground, TouchableOpacity, Linking} from 'react-native';
 import { StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useRoute } from '@react-navigation/native';
@@ -15,13 +15,13 @@ function ResultsScreen({route, navigation}) {
 
     let ID = 0;
 
-    const addrecipe = (recipe, image) => {
-        setrecipes((prevRecipe) => {
-          return [
-            ...prevRecipe, {id: ID++, recipe: recipe, image: image}
-          ]
-        })
-      }
+    const addrecipe = (label, image, url) => {
+      setrecipes((prevRecipe) => {
+        return [
+          ...prevRecipe, {id: ID++, label: label, image: image, url: url}
+        ]
+      })
+    }
 
       const ResultsHandler = () =>{
         setQuery('');
@@ -29,7 +29,15 @@ function ResultsScreen({route, navigation}) {
         searchrecipes();
         console.log(recipes);
       }
-
+      const onPress = async (url) => {
+        try{
+          await Linking.openURL(url);
+    
+        }
+        catch(error){
+          console.error('error opening:', error);
+        }
+      };
       async function searchrecipes(){
         try{
           const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=10a84d9e&app_key=776b79e8871d37f129cf1e05b0cb2774`);
@@ -49,7 +57,7 @@ function ResultsScreen({route, navigation}) {
             <a href = "${recipe.recipe.url}" target="_blank">View Recipe</a>
             </div>
             `;
-            addrecipe(recipe.recipe.label, recipe.recipe.image);
+            addrecipe(recipe.recipe.label, recipe.recipe.image, recipe.recipe.url);
           })
     
         
@@ -77,14 +85,15 @@ function ResultsScreen({route, navigation}) {
             data={recipes} 
             style={style.List}
             renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => this.onPress(item)}>
+            <TouchableOpacity onPress={() => onPress(item.url)}>
 
-                <Text style={style.TextStyle}>{item.recipe}</Text>
+                <Text style={style.TextStyle}>{item.label}</Text>
                 <Image 
                     source={{
-                    uri: 
-                    '{item.image}',
-                }}/>
+                    width: 300,
+                    height: 300,
+                    uri: item.image}}/>
+
 
             </TouchableOpacity>
 
