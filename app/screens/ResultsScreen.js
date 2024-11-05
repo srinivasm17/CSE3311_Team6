@@ -4,6 +4,7 @@ import { FlatList, Text, View, TextInput, Alert, Image, ImageBackground, Touchab
 import { StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import { useRoute } from '@react-navigation/native';
+import { ingredient_prices } from './data';
 
 import SearchBar from '../components/SearchBar';
 
@@ -15,10 +16,10 @@ function ResultsScreen({route, navigation}) {
 
     let ID = 0;
 
-    const addrecipe = (label, image, url) => {
+    const addrecipe = (label, image, url, ingredients, price) => {
       setrecipes((prevRecipe) => {
         return [
-          ...prevRecipe, {id: ID++, label: label, image: image, url: url}
+          ...prevRecipe, {id: ID++, label: label, image: image, url: url, ingredients: ingredients, price: price }
         ]
       })
     }
@@ -57,7 +58,44 @@ function ResultsScreen({route, navigation}) {
             <a href = "${recipe.recipe.url}" target="_blank">View Recipe</a>
             </div>
             `;
-            addrecipe(recipe.recipe.label, recipe.recipe.image, recipe.recipe.url);
+            const ingredients = [];
+            let price = 0;
+            let price_rating = '$';
+            recipe.recipe.ingredients.forEach(object =>{
+              ingredients.push(object.food);
+              let indata = false;
+
+              ingredient_prices.forEach(ingredient =>{
+                if (ingredient.ingredient === object.food.toLowerCase()){
+                  indata = true;
+                  price += ingredient.price;
+                }
+              }
+
+              )
+              if (indata == false){
+                console.log(object.food + " not in data.");
+                console.log(" ");
+              } 
+
+            })
+            if (price <= 5){
+              price_rating = '$';
+            }
+            else if (price <= 10){
+              price_rating = '$$';
+            }
+            else if (price <= 15){
+              price_rating = '$$$';
+            }
+            else if (price <= 20){
+              price_rating = '$$$$';
+            }
+            else{
+              price_rating = '$$$$$';
+            }
+            addrecipe(recipe.recipe.label, recipe.recipe.image, recipe.recipe.url, ingredients, price_rating);
+            //console.log(ingredients);
           })
     
         
@@ -85,14 +123,16 @@ function ResultsScreen({route, navigation}) {
             data={recipes} 
             style={style.List}
             renderItem={({ item }) => (
-            <TouchableOpacity onPress={() => onPress(item.url)}>
-
+            <TouchableOpacity style={style.recipe}
+            onPress={() => onPress(item.url)}>
                 <Text style={style.TextStyle}>{item.label}</Text>
+                <Text style={style.TextStyle}>{item.price}</Text>
                 <Image 
                     source={{
                     width: 300,
                     height: 300,
-                    uri: item.image}}/>
+                    uri: item.image}}
+                    />
 
 
             </TouchableOpacity>
@@ -107,12 +147,15 @@ function ResultsScreen({route, navigation}) {
 const style = StyleSheet.create({
     results:{
         flex: 1,
-        backgroundColor: '#20b2aa',
+        backgroundColor: '#ffebcd',
         paddingLeft: 10,
-        paddingTop: 10
+        paddingTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     TextStyle:{
         fontSize: 20,
+        fontFamily: "Cochin",
         fontWeight:'bold'
     },
     icon:{
@@ -121,7 +164,14 @@ const style = StyleSheet.create({
     },
     List:{
       marginLeft: 5,
-      marginTop: 5
+      marginTop: 5,
+
+    },
+    recipe:{
+      alignItems: 'center',
+      justifyContent: 'center',   
+      backgroundColor: '#ff7f50',
+      padding: 20,
     }
 })
 
