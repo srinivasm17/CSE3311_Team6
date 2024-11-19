@@ -118,7 +118,8 @@ function ResultsScreen({route, navigation}) {
                     size={35}
                     onPress={() => navigation.navigate('Home')}/>
             </TouchableOpacity>
-            <FlatList 
+            <FlatList
+            showsVerticalScrollIndicator={false} 
             keyExtractor={(item) => item.id}
             data={recipes} 
             style={style.List}
