@@ -60,7 +60,7 @@ function ResultsScreen({route, navigation}) {
             `;
             const ingredients = [];
             let price = 0;
-            let price_rating = '$';
+            let price_rating = 'price is pending';
             recipe.recipe.ingredients.forEach(object =>{
               ingredients.push(object.food);
               let indata = false;
@@ -74,12 +74,16 @@ function ResultsScreen({route, navigation}) {
 
               )
               if (indata == false){
+                price -= 100;
                 console.log(object.food + " not in data.");
                 console.log(" ");
               } 
 
             })
-            if (price <= 5){
+            if(price < 0){
+              price_rating = 'price is pending';
+            }
+            else if (price <= 5){
               price_rating = '$';
             }
             else if (price <= 10){
