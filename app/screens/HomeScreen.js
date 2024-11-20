@@ -1,14 +1,16 @@
 import React from "react";
-import {View, Text, StyleSheet, ScrollView, Image, Dimensions, Animated} from "react-native";
+import {View, Text, StyleSheet, ScrollView, Image, Dimensions, Animated, ImageBackground} from "react-native";
 import SearchBar from '../components/SearchBar';
 import Category from "../components/explore/Category";
 import Tag from "../components/explore/Tag";
 
 const {height, width} = Dimensions.get('window')
+const image = {uri:'https://img.freepik.com/premium-photo/food-background-black-herbs-spices-utensil-top-view-with-space-text_1040174-349.jpg'}
 export default function HomeScreen(props) {
     
     return (
         <View  style={style.BG}>
+        <ImageBackground source={image} style={style.ImageBack}>
             <SearchBar/>
             <Animated.View
                 style = {style.AnimatedTab}
@@ -90,13 +92,18 @@ export default function HomeScreen(props) {
                     </View>
                 </View>
             </ScrollView>
+        </ImageBackground>
         </View>
     );
 }
 
 const style = StyleSheet.create({
+    ImageBack: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center'
+    },
     BG: {
-        backgroundColor: '#b0c4de',
         flex: 1
     },
     HomeText:{

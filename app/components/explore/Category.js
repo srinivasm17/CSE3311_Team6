@@ -82,6 +82,6 @@ const style = StyleSheet.create({
         flex: 1,
         paddingLeft: 10,
         paddingTop: 10,
-        backgroundColor: '#f0ffff'
+        backgroundColor: '#ffffff'
     }
 })
