@@ -102,7 +102,7 @@ function ResultsScreen({route, navigation}) {
               price_rating = '$$$$$';
             }
             if (incomplete == true){
-              price_rating += '  (price is pending)'
+              price_rating += '  *'
             }
             addrecipe(recipe.recipe.label, recipe.recipe.image, recipe.recipe.url, ingredients, price_rating);
             //console.log(ingredients);
