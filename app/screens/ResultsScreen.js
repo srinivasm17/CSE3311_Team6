@@ -12,6 +12,7 @@ function ResultsScreen({route, navigation}) {
     const { recipeQuery } = route.params;
     const [query, setQuery] = useState(recipeQuery);
     const [recipes, setrecipes] = useState([]);
+    const {filters} = route.params;
     console.log('Sent query:', query);
 
     let ID = 0;
