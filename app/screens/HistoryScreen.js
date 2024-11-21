@@ -53,7 +53,7 @@ const style = StyleSheet.create({
   recipe:{
     alignItems: 'center',
     justifyContent: 'center',   
-    backgroundColor: '#ff7f50',
+    backgroundColor: '#e0ffff',
     padding: 20,
   }
 });

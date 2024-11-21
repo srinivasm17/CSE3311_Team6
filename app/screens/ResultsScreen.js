@@ -3,12 +3,15 @@ import { useState, useEffect } from "react";
 import { FlatList, Text, View, TextInput, Alert, Image, ImageBackground, TouchableOpacity, Linking} from 'react-native';
 import { StyleSheet } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useRoute } from '@react-navigation/native';
 import { ingredient_prices } from './data';
 
 import SearchBar from '../components/SearchBar';
 import HistoryScreen from './HistoryScreen';
+import BookmarkScreen from './BookmarkScreen';
 import {RecipeData} from './HistoryScreen';
+import { BookmarkData } from './BookmarkScreen';
 
 
 function ResultsScreen({route, navigation}) {
@@ -138,6 +141,16 @@ function ResultsScreen({route, navigation}) {
               onPress(item.url)}}>
                 <Text style={style.TextStyle}>{item.label}</Text>
                 <Text style={style.TextStyle}>{item.price}</Text>
+                <TouchableOpacity>
+                    <Ionicons
+                    style={style.icon}
+                    name='bookmark-outline'
+                    size={35}
+                    onPress={() => {
+                      BookmarkData.push(item);
+                      console.log('Bookmarking item:',item.label, item.url);
+                    }}/>
+            </TouchableOpacity>
                 <Image 
                     source={{
                     width: 300,
@@ -158,7 +171,7 @@ function ResultsScreen({route, navigation}) {
 const style = StyleSheet.create({
     results:{
         flex: 1,
-        backgroundColor: '#ffebcd',
+        backgroundColor: '#ffb6c1',
         paddingLeft: 10,
         paddingTop: 10,
         alignItems: 'center',
@@ -181,7 +194,7 @@ const style = StyleSheet.create({
     recipe:{
       alignItems: 'center',
       justifyContent: 'center',   
-      backgroundColor: '#ff7f50',
+      backgroundColor: '#f08080',
       padding: 20,
     }
 })
