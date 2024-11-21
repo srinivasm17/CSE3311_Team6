@@ -75,7 +75,7 @@ export default function SearchBar() {
     },
     Main:{
         backgroundColor: '#FFF',
-        width: 250,
+        width: 240,
         height: 50,
         borderTopLeftRadius: 40,
         borderBottomLeftRadius: 40,
@@ -85,12 +85,12 @@ export default function SearchBar() {
     },
     Input:{
         marginLeft: 10,
-        marginTop: 9,
+        marginTop: 5,
         fontSize: 18
     },
     buttonP:{
         height: 50,
-        width: 70,
+        width: 65,
         backgroundColor: '#FFF',
         borderWidth: 2,
         borderBottomRightRadius: 30,
