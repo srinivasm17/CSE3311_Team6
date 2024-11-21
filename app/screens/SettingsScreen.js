@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {StyleSheet, SafeAreaView, View, ScrollView, Text, TouchableOpacity, Switch, Image} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-export default function Example() {
+export default function SettingsScreen() {
   const [form, setForm] = useState({
     darkMode: false,
     emailNotifications: true,
@@ -10,9 +10,6 @@ export default function Example() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Settings</Text>
-        </View>
         <ScrollView>
           <View style={styles.profile}>
             <Image

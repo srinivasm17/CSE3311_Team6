@@ -5,7 +5,7 @@ import Category from "../components/explore/Category";
 import Tag from "../components/explore/Tag";
 
 const {height, width} = Dimensions.get('window')
-const image = {uri:'https://img.freepik.com/premium-photo/food-background-black-herbs-spices-utensil-top-view-with-space-text_1040174-349.jpg'}
+const image = {uri:'https://img.freepik.com/free-vector/brown-white-abstract-background-gradient-texture_1258-41342.jpg'}
 export default function HomeScreen(props) {
     
     return (

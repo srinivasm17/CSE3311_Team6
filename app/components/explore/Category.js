@@ -69,8 +69,10 @@ const style = StyleSheet.create({
         height: 130,
         width: 130,
         marginLeft: 20,
-        borderWidth: 0.6,
-        borderColor: '#2f4f4f'
+        borderWidth: 1.5,
+        borderColor: '#2f4f4f',
+        borderRadius: 6,
+        overflow: 'hidden'
     },
     Image: {
         flex: 1,
