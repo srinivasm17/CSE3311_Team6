@@ -7,6 +7,9 @@ import { useRoute } from '@react-navigation/native';
 import { ingredient_prices } from './data';
 
 import SearchBar from '../components/SearchBar';
+import HistoryScreen from './HistoryScreen';
+import {RecipeData} from './HistoryScreen';
+
 
 function ResultsScreen({route, navigation}) {
     const { recipeQuery } = route.params;
@@ -60,13 +63,10 @@ function ResultsScreen({route, navigation}) {
             `;
             const ingredients = [];
             let price = 0;
-
             let price_rating = 'price is pending';
-            let incomplete = false;
             recipe.recipe.ingredients.forEach(object =>{
               ingredients.push(object.food);
               let indata = false;
-
 
               ingredient_prices.forEach(ingredient =>{
                 if (ingredient.ingredient === object.food.toLowerCase()){
@@ -77,9 +77,9 @@ function ResultsScreen({route, navigation}) {
 
               )
               if (indata == false){
+                price -= 100;
                 console.log(object.food + " not in data.");
                 console.log(" ");
-                incomplete = true;
               } 
 
             })
@@ -100,9 +100,6 @@ function ResultsScreen({route, navigation}) {
             }
             else{
               price_rating = '$$$$$';
-            }
-            if (incomplete == true){
-              price_rating += '  (price is pending)'
             }
             addrecipe(recipe.recipe.label, recipe.recipe.image, recipe.recipe.url, ingredients, price_rating);
             //console.log(ingredients);
@@ -128,13 +125,17 @@ function ResultsScreen({route, navigation}) {
                     size={35}
                     onPress={() => navigation.navigate('Home')}/>
             </TouchableOpacity>
-            <FlatList 
+            <FlatList
+            showsVerticalScrollIndicator={false} 
             keyExtractor={(item) => item.id}
             data={recipes} 
             style={style.List}
             renderItem={({ item }) => (
             <TouchableOpacity style={style.recipe}
-            onPress={() => onPress(item.url)}>
+            onPress={() => {
+              RecipeData.push(item);
+              console.log('Logging item:',item.label, item.url);
+              onPress(item.url)}}>
                 <Text style={style.TextStyle}>{item.label}</Text>
                 <Text style={style.TextStyle}>{item.price}</Text>
                 <Image 
