@@ -60,10 +60,13 @@ function ResultsScreen({route, navigation}) {
             `;
             const ingredients = [];
             let price = 0;
+
             let price_rating = 'price is pending';
+            let incomplete = false;
             recipe.recipe.ingredients.forEach(object =>{
               ingredients.push(object.food);
               let indata = false;
+
 
               ingredient_prices.forEach(ingredient =>{
                 if (ingredient.ingredient === object.food.toLowerCase()){
@@ -74,9 +77,9 @@ function ResultsScreen({route, navigation}) {
 
               )
               if (indata == false){
-                price -= 100;
                 console.log(object.food + " not in data.");
                 console.log(" ");
+                incomplete = true;
               } 
 
             })
@@ -97,6 +100,9 @@ function ResultsScreen({route, navigation}) {
             }
             else{
               price_rating = '$$$$$';
+            }
+            if (incomplete == true){
+              price_rating += '  (price is pending)'
             }
             addrecipe(recipe.recipe.label, recipe.recipe.image, recipe.recipe.url, ingredients, price_rating);
             //console.log(ingredients);
@@ -122,8 +128,7 @@ function ResultsScreen({route, navigation}) {
                     size={35}
                     onPress={() => navigation.navigate('Home')}/>
             </TouchableOpacity>
-            <FlatList
-            showsVerticalScrollIndicator={false} 
+            <FlatList 
             keyExtractor={(item) => item.id}
             data={recipes} 
             style={style.List}
