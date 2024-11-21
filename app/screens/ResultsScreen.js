@@ -18,6 +18,7 @@ function ResultsScreen({route, navigation}) {
     const { recipeQuery } = route.params;
     const [query, setQuery] = useState(recipeQuery);
     const [recipes, setrecipes] = useState([]);
+    const {filters} = route.params;
     console.log('Sent query:', query);
 
     let ID = 0;
@@ -103,6 +104,9 @@ function ResultsScreen({route, navigation}) {
             }
             else{
               price_rating = '$$$$$';
+            }
+            if (incomplete == true){
+              price_rating += '  (price is pending)'
             }
             addrecipe(recipe.recipe.label, recipe.recipe.image, recipe.recipe.url, ingredients, price_rating);
             //console.log(ingredients);
