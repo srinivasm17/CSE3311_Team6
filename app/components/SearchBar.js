@@ -8,6 +8,7 @@ import { useState } from "react";
 
 import ResultsScreen from '../screens/ResultsScreen';
 import HomeScreen from '../screens/HomeScreen';
+import FilterModal from '../components/FilterModal';
 
 const resultsName = 'Results';
 const homeName = 'Home';
@@ -45,6 +46,7 @@ export default function SearchBar() {
 
     return (
         <View style={style.Assembler}>
+        <FilterModal/>
         <View style={style.Main}>
             <TextInput 
                 style={style.Input}
