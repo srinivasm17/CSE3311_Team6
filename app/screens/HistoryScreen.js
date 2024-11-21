@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {StyleSheet, SafeAreaView, View, ScrollView, Text, TouchableOpacity, Switch, Image} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+
+export const RecipeData = [];
 export default function HistoryScreen() {
   const [form, setForm] = useState({
     darkMode: false,
